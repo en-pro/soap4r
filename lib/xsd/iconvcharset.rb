@@ -6,7 +6,7 @@
 # either the dual license version in 2003, or any later version.
 
 
-require 'iconv'
+#require 'iconv'
 
 
 module XSD
@@ -14,11 +14,11 @@ module XSD
 
 class IconvCharset
   def self.safe_iconv(to, from, str)
-    iconv = Iconv.new(to, from)
+    iconv = String.encode(to, from)
     out = ""
     begin
       out << iconv.iconv(str)
-    rescue Iconv::IllegalSequence => e
+    rescue Encoding::InvalidByteSequenceError => e
       out << e.success
       ch, str = e.failed.split(//, 2)
       out << '?'
