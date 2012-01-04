@@ -17,7 +17,7 @@ class IconvCharset
     iconv = String.encode(to, from)
     out = ""
     begin
-      out << iconv.iconv(str)
+      out << iconv.encode(str)
     rescue Encoding::InvalidByteSequenceError => e
       out << e.success
       ch, str = e.failed.split(//, 2)
